@@ -2,6 +2,9 @@ const express = require('express');
 const { decrypt } = require('./crypto');
 const app = express();
 
+const cors = require('cors');
+app.use(cors());
+
 app.get('/', (req, res) => {
 
     const codes = JSON.parse(require('fs').readFileSync('codes.json'));
