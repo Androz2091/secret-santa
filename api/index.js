@@ -11,10 +11,25 @@ app.get('/', (req, res) => {
     
     const queryCode = req.query.code;
 
-    const queryGifter = codes.find(({ code }) => code === queryCode).name;
-    const queryReceiver = decryptedNames.find(({ gifter }) => gifter === queryGifter).receiver;
+    if (!queryCode) {
+        res.send({
+            error: 'No code provided'
+        });
+    }
 
-    res.send(`${queryGifter} should give a gift to ${queryReceiver}`);
+    try {
+        const queryGifter = codes.find(({ code }) => code === queryCode).name;
+        const queryReceiver = decryptedNames.find(({ gifter }) => gifter === queryGifter).receiver;
+
+        res.send({
+            gifter: queryGifter,
+            receiver: queryReceiver
+        });
+    } catch (e) {
+        res.send({
+            error: 'Invalid code'
+        });
+    }
     
 });
 
