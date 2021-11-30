@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     const queryCode = req.query.code;
 
     if (!queryCode) {
-        res.send({
+        return res.send({
             error: 'Aucun code précisé!'
         });
     }
