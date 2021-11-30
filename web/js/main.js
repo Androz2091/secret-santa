@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
 
@@ -21,7 +20,10 @@
     [ Validate ]*/
     var input = $('.validate-input .input100');
 
-    $('.validate-form').on('submit',function(){
+    $('.validate-form').on('submit',function(e){
+
+        e.preventDefault();
+
         var check = true;
 
         for(var i=0; i<input.length; i++) {
@@ -29,6 +31,42 @@
                 showValidate(input[i]);
                 check=false;
             }
+        }
+
+        if(check){
+            var form = $(this);
+            var data = form.serialize();
+            var pass = data.split("&")[0].split("=")[1];
+            var url = `https://secret-santa-api.smn.tools?code=${pass}`;
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(data){
+                    if(data.error){
+                        alert(data.error);
+                    }else{
+                        $(".wrap-input100").hide();
+                        $(".container-login100-form-btn").hide();
+                        $("#foot").hide();
+                        $("#res").show();
+                        $("#res").html(`
+                            Hey <b>${data.gifter}</b>, vous devez offrir un cadeau à <b>${data.receiver}</b>! 🍬🍬🍬
+                            <br>
+                            <br>
+                            • Pour rappel, merci de ne pas divulguer votre match à quicquonque, c'est le principe même du jeu ❓
+                            <br>
+                            <br>
+                            • Ne dépassez pas 5€ de budget, le but est d'offrir un petit quelque chose 😉
+                            <br>
+                            <br>
+                            • Chaque élève de la classe a déjà un match donc ne vous désistez pas 😅
+                            <br>
+                            <br>
+                            • Si vous avez des questions n'hésitez pas à nous contacter sur Instagram (@adelexfgs ou @smn_lfrt)
+                        `);
+                    }
+                }
+            });
         }
 
         return check;
