@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
     if (!queryCode) {
         res.send({
-            error: 'No code provided'
+            error: 'Aucun code précisé!'
         });
     }
 
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
         });
     } catch (e) {
         res.send({
-            error: 'Invalid code'
+            error: 'Votre code est invalide!'
         });
     }
     
