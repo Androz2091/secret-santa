@@ -53,7 +53,7 @@
                             Hey <b>${data.gifter}</b>, vous devez offrir un cadeau à <b>${data.receiver}</b>! 🍬🍬🍬
                             <br>
                             <br>
-                            • Pour rappel, merci de ne pas divulguer votre match à quicquonque, c'est le principe même du jeu ❓
+                            • Pour rappel, merci de ne pas divulguer votre match à quiconque, c'est le principe même du jeu 💫
                             <br>
                             <br>
                             • Ne dépassez pas 5€ de budget, le but est d'offrir un petit quelque chose 😉
